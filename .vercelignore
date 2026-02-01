@@ -1,0 +1,9 @@
+node_modules
+.git
+.DS_Store
+*.log
+start-server.sh
+PROJECT_DOCUMENTATION.md
+DELIVERY_SUMMARY.md
+STRUCTURE.md
+QUICKSTART.md
