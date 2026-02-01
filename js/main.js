@@ -115,7 +115,7 @@
         button.disabled = true;
         
         // Replace with your Google Apps Script Web App URL
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwK1_nM02tqx01B4TgUaM6JE8chdeCYZF0iyq_V8tywjPYHd9k89g4YjPuVQtqd3xPSoQ/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyHgtOPPKrzZb-nNr8sO3s9x1Qk5LnPBnPBSYqdtJsJR9DH3QwPz2pGRMZo0A9EVVWLuQ/exec';
         
         // Send data to Google Apps Script
         fetch(SCRIPT_URL, {
