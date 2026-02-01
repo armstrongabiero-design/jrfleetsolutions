@@ -95,31 +95,66 @@
         // Get form data
         const formData = new FormData(demoForm);
         
-        // Show success message (in production, this would be an API call)
+        // Convert FormData to JSON
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+        
+        // Validate required fields
+        if (!data.name || !data.email || !data.company) {
+            showNotification('Please fill in all required fields.', 'error');
+            return;
+        }
+        
+        // Show loading state
         const button = demoForm.querySelector('button[type="submit"]');
         const originalText = button.textContent;
         
         button.textContent = 'Submitting...';
         button.disabled = true;
         
-        // Simulate API call
-        setTimeout(() => {
-            button.textContent = 'Request Sent!';
-            button.style.backgroundColor = 'var(--color-gold-light)';
+        // Replace with your Google Apps Script Web App URL
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwK1_nM02tqx01B4TgUaM6JE8chdeCYZF0iyq_V8tywjPYHd9k89g4YjPuVQtqd3xPSoQ/exec';
+        
+        // Send data to Google Apps Script
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                // Success
+                button.textContent = 'Request Sent!';
+                button.style.backgroundColor = 'var(--color-gold-light)';
+                
+                // Reset form
+                demoForm.reset();
+                
+                // Show success message
+                showNotification('Thank you! We will contact you shortly to schedule your demo.', 'success');
+                
+                // Reset button after delay
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.disabled = false;
+                    button.style.backgroundColor = '';
+                }, 3000);
+            } else {
+                throw new Error(result.message || 'Submission failed');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
             
-            // Reset form
-            demoForm.reset();
+            // Show error message
+            showNotification('There was an error submitting your request. Please try again.', 'error');
             
-            // Show success message
-            showNotification('Thank you! We\'ll contact you shortly to schedule your demo.', 'success');
-            
-            // Reset button after delay
-            setTimeout(() => {
-                button.textContent = originalText;
-                button.disabled = false;
-                button.style.backgroundColor = '';
-            }, 3000);
-        }, 1500);
+            // Reset button
+            button.textContent = originalText;
+            button.disabled = false;
+        });
     }
 
     // ==========================================
