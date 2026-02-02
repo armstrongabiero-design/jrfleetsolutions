@@ -6,13 +6,18 @@
  * 1. Create a new Google Sheet
  * 2. Tools > Script editor
  * 3. Paste this code
- * 4. Update ADMIN_EMAIL constant
+ * 4. Update ADMIN_EMAILS array with your admin email addresses
  * 5. Deploy as Web App (Anyone can access)
  * 6. Copy deployment URL to frontend
  */
 
 // Configuration
-const ADMIN_EMAIL = 'admin@jrfleetsolutions.com'; // Update this
+const ADMIN_EMAILS = [
+  'deforexsp@gmail.com',
+  // Add more admin emails below:
+  // 'admin2@example.com',
+  // 'sales@jrfleetsolutions.com'
+];
 const COMPANY_NAME = 'JR Fleet Solutions';
 const COMPANY_WEBSITE = 'https://jrfleetsolutions.com';
 const SHEET_NAME = 'Demo Requests';
@@ -297,6 +302,12 @@ function sendUserConfirmation(data) {
               <span class="info-value">${data.fleetSize}</span>
             </div>
             ` : ''}
+            ${data.message ? `
+            <div class="info-row">
+              <span class="info-label">Message:</span>
+              <span class="info-value">${data.message}</span>
+            </div>
+            ` : ''}
           </div>
           
           <!-- Next Steps -->
@@ -360,6 +371,7 @@ Company: ${data.company}
 Email: ${data.email}
 ${data.phone ? 'Phone: ' + data.phone : ''}
 ${data.fleetSize ? 'Fleet Size: ' + data.fleetSize : ''}
+${data.message ? 'Message: ' + data.message : ''}
 
 WHAT HAPPENS NEXT
 - Our team will review your specific requirements and fleet management needs
@@ -661,8 +673,11 @@ All data has been logged to the Demo Requests tracking sheet.
 ${COMPANY_NAME}
 `;
   
+  // Send to all admin emails
+  const recipients = ADMIN_EMAILS.join(',');
+  
   GmailApp.sendEmail(
-    ADMIN_EMAIL,
+    recipients,
     subject,
     plainBody,
     {

@@ -32,11 +32,17 @@ This setup will:
 
 ### Configure Settings
 
-Update the admin email in the script:
+Update the admin emails in the script:
 
 ```javascript
-const ADMIN_EMAIL = 'your-admin-email@domain.com'; // Change this!
+const ADMIN_EMAILS = [
+  'admin1@jrfleetsolutions.com',
+  'admin2@jrfleetsolutions.com',
+  'sales@jrfleetsolutions.com'
+]; // Add all admin emails who should receive notifications
 ```
+
+**Note:** The script will send notifications to all email addresses in the array.
 
 Optional: Update company website if different:
 
@@ -168,19 +174,9 @@ Check these three things:
 
 ## Customization Options
 
-### Change Admin Email
+### Update Admin Email Recipients
 
-Edit in `gas-form-handler.js`:
-
-```javascript
-const ADMIN_EMAIL = 'newadmin@domain.com';
-```
-
-Then redeploy the script.
-
-### Add Multiple Admin Recipients
-
-Change the admin notification function:
+The script is already configured to support multiple admin emails. Edit in `gas-form-handler.js`:
 
 ```javascript
 const ADMIN_EMAILS = [
@@ -188,15 +184,11 @@ const ADMIN_EMAILS = [
   'admin2@domain.com',
   'sales@domain.com'
 ];
-
-// In sendAdminNotification function:
-GmailApp.sendEmail(
-  ADMIN_EMAILS.join(','), // Send to multiple
-  subject,
-  plainBody,
-  { htmlBody: htmlBody, name: COMPANY_NAME }
-);
 ```
+
+Add or remove email addresses as needed. All emails in the array will receive notifications.
+
+Then redeploy the script (Deploy > New deployment).
 
 ### Customize Email Content
 

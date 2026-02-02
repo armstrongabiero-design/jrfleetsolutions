@@ -347,6 +347,13 @@ select.form-input {
     padding-right: 2.5rem;
 }
 
+textarea.form-input {
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.6;
+    font-family: var(--font-primary);
+}
+
 /* Utility Classes */
 .text-center {
     text-align: center;

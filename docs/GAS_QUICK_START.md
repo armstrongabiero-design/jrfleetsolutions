@@ -11,10 +11,14 @@
 - Copy all code from `gas-form-handler.js`
 - Paste into editor
 
-### 3. Update Admin Email
+### 3. Update Admin Emails
 ```javascript
-const ADMIN_EMAIL = 'your-email@domain.com'; // Line 15
+const ADMIN_EMAILS = [
+  'admin1@domain.com',
+  'admin2@domain.com'
+]; // Line 15-18
 ```
+**Add all admins who should receive notifications**
 
 ### 4. Deploy
 - Deploy > New deployment > Web app
