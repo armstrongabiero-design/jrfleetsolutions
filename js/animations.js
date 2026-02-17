@@ -277,6 +277,7 @@
                 const background = this.hero.querySelector('.hero-background');
                 if (background) {
                     background.style.backgroundImage = `
+                        url('/assets/images/jrfleets background.png'),
                         radial-gradient(circle at ${x}% ${y}%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
                         radial-gradient(circle at ${80 - x/2}% ${80 - y/2}%, rgba(212, 175, 55, 0.05) 0%, transparent 50%)
                     `;
